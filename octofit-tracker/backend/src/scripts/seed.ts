@@ -37,22 +37,22 @@ export async function seed() {
     await Activity.updateOne(
       { user: mona._id, team: octocats._id, type: 'run', occurredAt: monaRunAt },
       { $set: { user: mona._id, team: octocats._id, type: 'run', minutes: 40, points: 40, occurredAt: monaRunAt } },
-      { upsert: true },
+      { upsert: true, runValidators: true },
     );
     await Activity.updateOne(
       { user: hubot._id, team: robocats._id, type: 'cycle', occurredAt: hubotCycleAt },
       { $set: { user: hubot._id, team: robocats._id, type: 'cycle', minutes: 25, points: 25, occurredAt: hubotCycleAt } },
-      { upsert: true },
+      { upsert: true, runValidators: true },
     );
     await Workout.updateOne(
       { title: 'Intervals' },
       { $set: { title: 'Intervals', focus: 'endurance', minutes: 30, difficulty: 'moderate' } },
-      { upsert: true },
+      { upsert: true, runValidators: true },
     );
     await Workout.updateOne(
       { title: 'Strength Circuit' },
       { $set: { title: 'Strength Circuit', focus: 'strength', minutes: 30, difficulty: 'moderate' } },
-      { upsert: true },
+      { upsert: true, runValidators: true },
     );
   } finally {
     await disconnectDatabase();
